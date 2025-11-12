@@ -18,5 +18,5 @@ import java.util.UUID;
 public interface UserRepo extends JpaRepository<User, UUID> {
 
     @Query(nativeQuery = true, value = "select u.* from public.ec_user u where u.email = :email")
-    public Optional<User> findByEmail(@Param("email") String email);
+    public User findByEmail(@Param("email") String email);
 }

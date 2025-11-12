@@ -1,10 +1,8 @@
 package org.orcacode.ecommerceuserservice.services;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.orcacode.ecommerceuserservice.entity.User;
 import org.orcacode.ecommerceuserservice.repository.UserRepo;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,12 +21,12 @@ import static org.mockito.Mockito.when;
  */
 @SpringBootTest
 //@ExtendWith(MockitoExtension.class)
-class UserSrvTest {
+class UserServiceTest {
     @Mock
     private UserRepo userRepo;
 
     @InjectMocks
-    private UserSrv userSrv;
+    private UserService userSrv;
 
     @Test
     void getUserById() {
@@ -36,7 +34,7 @@ class UserSrvTest {
         LocalDate date = LocalDate.now();
         UUID uuid = UUID.randomUUID();
 
-        user.setId(uuid);
+//        user.setId(uuid);
         user.setUserName("Alireza");
         user.setEmail("Alireza@gmail.com");
         user.setCreationDate(date);

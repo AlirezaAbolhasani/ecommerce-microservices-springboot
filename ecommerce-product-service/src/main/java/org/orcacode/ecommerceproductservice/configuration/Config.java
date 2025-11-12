@@ -1,8 +1,7 @@
-package org.orcacode.ecommerceuserservice.configuration;
+package org.orcacode.ecommerceproductservice.configuration;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -11,7 +10,6 @@ import org.springframework.context.annotation.Configuration;
  * 11/5/2025
  */
 @Configuration
-@ComponentScan("org.orcacode.ecommerceuserservice.*")
 public class Config {
     @Bean
     public ModelMapper modelMapper(){
