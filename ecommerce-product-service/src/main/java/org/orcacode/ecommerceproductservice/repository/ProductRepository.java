@@ -12,5 +12,5 @@ import java.util.UUID;
  * 11/9/2025
  */
 @Repository
-public interface ProductRepository extends JpaRepository<Product, UUID> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 }

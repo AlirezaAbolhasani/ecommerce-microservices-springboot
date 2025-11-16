@@ -1,6 +1,6 @@
-package org.orcacode.ecommercepaymentservice.repository;
+package org.orcacode.ecommerceorderservice.repository;
 
-import org.orcacode.ecommercepaymentservice.entity.Payment;
+import org.orcacode.ecommerceorderservice.entity.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +10,6 @@ import org.springframework.stereotype.Repository;
  * 11/11/2025
  */
 @Repository
-public interface PaymentRepository extends JpaRepository<Payment, Long> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
+
 }

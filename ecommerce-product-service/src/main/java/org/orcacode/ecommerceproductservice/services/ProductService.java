@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static org.orcacode.ecommerceproductservice.messages.Messages.*;
@@ -23,6 +22,7 @@ import static org.orcacode.ecommerceproductservice.messages.Messages.*;
  * ecommerce-microservices-springboot
  * 11/9/2025
  */
+
 @Service
 public class ProductService {
 
@@ -41,18 +41,17 @@ public class ProductService {
     @Transactional(readOnly = true)
     public List<ProductDto> getAllProducts() {
         List<Product> productList = productRepository.findAll();
-        return productList.stream().
-                map(pr -> mapper.map(pr, ProductDto.class))
-                .collect(Collectors.toList());
-    }
-    @Transactional
-    public ProductDto getProductById(UUID id) {
-        return mapper.map(productRepository.findById(id).orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, "Id not found.")), ProductDto.class);
+        return productList.stream().map(pr -> mapper.map(pr, ProductDto.class)).collect(Collectors.toList());
     }
 
     @Transactional
-    public ProductDto deleteProductById(UUID id) {
-        Product product = productRepository.findById(id).orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, "Id not found."));
+    public ProductDto getProductById(Long id) {
+        return mapper.map(productRepository.findById(id).orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, PRODUCT_NOT_FOUND)), ProductDto.class);
+    }
+
+    @Transactional
+    public ProductDto deleteProductById(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, PRODUCT_NOT_FOUND));
         productRepository.deleteById(id);
         return productMapper.toDto(product);
     }
@@ -60,17 +59,17 @@ public class ProductService {
     @Transactional
     public ProductDto saveProduct(Product product) {
         if (product == null) {
-            throw new BusinessException(HttpStatus.BAD_REQUEST, "Product cannot be null");
+            throw new BusinessException(HttpStatus.BAD_REQUEST, BAD_REQUEST);
         } else {
             return productMapper.toDto(productRepository.save(product));
         }
     }
 
     @Transactional
-    public ProductDto updatePartial(UUID id , ProductDto productPatchDto) {
-        if(id == null){
-            throw new BusinessException(HttpStatus.NOT_FOUND ,"Id cannot ne null");
-        }else {
+    public ProductDto updatePartial(Long id, ProductDto productPatchDto) {
+        if (id == null) {
+            throw new BusinessException(HttpStatus.NOT_FOUND, PRODUCT_NOT_FOUND);
+        } else {
             Product updatedProduct = productMapper.toEntity(getProductById(id));
             productMapper.updateFromDto(productPatchDto, updatedProduct); // MapStruct updates only non-null fields
             return mapper.map(productRepository.save(updatedProduct), ProductDto.class);
@@ -78,10 +77,14 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductDto updateProductQuantity(UUID id, Integer quantity) {
-        Product product = productMapper.toEntity(getProductById(id));
-        product.setQuantity(quantity);
-        return productMapper.toDto(productRepository.save(product));
+    public ProductDto updateProductQuantity(Long id, Integer quantity) {
+        if (id == null) {
+            throw new BusinessException(HttpStatus.NOT_FOUND, PRODUCT_NOT_FOUND);
+        } else {
+            Product product = productMapper.toEntity(getProductById(id));
+            product.setQuantity(quantity);
+            return productMapper.toDto(productRepository.save(product));
+        }
     }
 
 }

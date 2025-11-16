@@ -14,10 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.orcacode.ecommerceproductservice.messages.*;
-
 import java.util.List;
-import java.util.UUID;
-
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 /**
@@ -54,7 +51,7 @@ public class ProductController {
             }
             )
     })
-    public ResponseEntity<ProductDto> getProductById(@PathVariable UUID id) {
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
         ProductDto productDto = productService.getProductById(id);
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }
@@ -73,19 +70,19 @@ public class ProductController {
     }
 
     @PatchMapping("e-commerce/product/{id}")
-    public ResponseEntity<ProductDto> update(@PathVariable UUID id, @RequestBody ProductDto dto) {
+    public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody ProductDto dto) {
         ProductDto productDto = productService.updatePartial(id, dto);
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }
 
     @PutMapping("e-commerce/product/{id}")
-    public ResponseEntity<ProductDto> updateQuantity(@PathVariable UUID id, @RequestBody Integer quantity) {
+    public ResponseEntity<ProductDto> updateQuantity(@PathVariable Long id, @RequestBody Integer quantity) {
         ProductDto productDto = productService.updateProductQuantity(id, quantity);
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }
 
     @DeleteMapping("e-commerce/product/{id}")
-    public ResponseEntity<ProductDto> delete(@PathVariable UUID id) {
+    public ResponseEntity<ProductDto> delete(@PathVariable Long id) {
         ProductDto productDto = productService.deleteProductById(id);
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }

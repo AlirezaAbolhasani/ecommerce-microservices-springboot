@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -32,14 +33,15 @@ public class UserService {
         this.userRepo = Objects.requireNonNull(userRepo, REPOSITORY_MUST_NOT_BE_NULL);
     }
 
+    @Transactional
     public User getUserById(UUID id) {
         return userRepo.findById(id).orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, "Id not found =" + id));
     }
-
+    @Transactional
     public User getUserByEmail(String email) {
         return Optional.of(userRepo.findByEmail(email)).orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, "Email not found = " + email));
     }
-
+    @Transactional
     public User saveUser(User user) {
         if(user== null){
             throw new BusinessException(HttpStatus.BAD_REQUEST, "User annot be null");
@@ -47,7 +49,7 @@ public class UserService {
             return userRepo.save(user);
         }
     }
-
+    @Transactional
     public User deleteUser(UUID id) {
         if(id == null) {
             throw new BusinessException(HttpStatus.BAD_REQUEST, "Id cannot be null");
@@ -58,11 +60,11 @@ public class UserService {
         }
         return user;
     }
-
+    @Transactional
     public List<User> getAllUsers() {
         return Optional.of(userRepo.findAll()).orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, "List is Empty."));
     }
-
+    @Transactional
     public void updateUser(User _user) {
         User user = new User();
         user = userRepo.findById(_user.getId()).orElseThrow(() -> new BusinessException(HttpStatus.NOT_FOUND, "User not found =" + _user.getId()));

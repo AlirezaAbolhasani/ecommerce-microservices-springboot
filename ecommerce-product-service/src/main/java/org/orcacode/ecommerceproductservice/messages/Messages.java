@@ -2,13 +2,14 @@ package org.orcacode.ecommerceproductservice.messages;
 
 public class Messages {
     /**
-     * Product Messages
+     * PRODUCT Messages
      */
-    public static final String INSERT_Product_SUCCESSFULLY = "Insert Product successfully.";
-    public static final String DELETED_Product_SUCCESSFULLY = "Delete Product successfully.";
-    public static final String UPDATED_Product_SUCCESSFULLY = "Updated Product successfully.";
-    public static final String Product_NOT_FOUND = "Product Not Found.";
-    public static final String Product_SUCCESSFULLY_FOUND = "Product successfully found.";
+    public static final String INSERT_PRODUCT_SUCCESSFULLY = "Insert PRODUCT successfully.";
+    public static final String DELETED_PRODUCT_SUCCESSFULLY = "Delete PRODUCT successfully.";
+    public static final String UPDATED_PRODUCT_SUCCESSFULLY = "Updated PRODUCT successfully.";
+    public static final String PRODUCT_NOT_FOUND = "PRODUCT Not Found.";
+    public static final String BAD_REQUEST = "Incorrect or null Id.";
+    public static final String PRODUCT_SUCCESSFULLY_FOUND = "PRODUCT successfully found.";
     /**
      * Global Messages
      */
