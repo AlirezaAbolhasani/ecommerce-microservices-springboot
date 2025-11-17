@@ -1,9 +1,10 @@
-package org.orcacode.ecommerceorderservice.dto;
+package org.orcacode.ecommerceorderservice.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
+import org.orcacode.ecommerceorderservice.dto.OrderDto;
 import org.orcacode.ecommerceorderservice.entity.Order;
 
 /**

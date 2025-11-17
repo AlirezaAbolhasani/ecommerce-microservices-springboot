@@ -28,8 +28,8 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RequestMapping("/api")
 public class UserController {
 
-    UserService userSrv;
-    User user;
+    private final UserService userSrv;
+    private final User user;
 
     public UserController(UserService userSrv) {
         this.userSrv = userSrv;
@@ -42,7 +42,7 @@ public class UserController {
      * @param id user id
      * @return user information
      */
-    @GetMapping("e-commerce/user/{id}")
+    @GetMapping("users/{id}")
     @Operation(summary = "Find a user by userID. This number is unique and personally.",
             description = "Id must exist")
     @ApiResponses(value = {
@@ -70,7 +70,7 @@ public class UserController {
      * @param email    Provides the email
      * @return Provide User inserted all data
      */
-    @PostMapping("e-commerce/user/")
+    @PostMapping("users/")
     @Operation(summary = "Insert a new user to DB",
             description = "UserName and email address are necessary")
     @ApiResponses(value = {
@@ -97,7 +97,7 @@ public class UserController {
      * @param user in user just will update name and email address
      * @return user that information will chang or not
      */
-    @PatchMapping("e-commerce/user/{id}")
+    @PatchMapping("users/{id}")
     @Operation(summary = "Update values like email and  e-commerce's user table",
             description = "Just you can update email and username")
     @ApiResponses(value = {
@@ -126,7 +126,7 @@ public class UserController {
      * @param id that need to delete its information
      * @return user that information will delete or not
      */
-    @DeleteMapping("e-commerce/user/{id}")
+    @DeleteMapping("users/{id}")
     @Operation(summary = "Use user Id to delete user from e-commerce's user table",
             description = "Id is necessary entry.")
     @ApiResponses(value = {

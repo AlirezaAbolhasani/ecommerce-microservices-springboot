@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
  * 11/5/2025
  */
 @Configuration
-public class Config {
+public class OrderConfiguration {
     @Bean
     public ModelMapper modelMapper(){
         return new ModelMapper();

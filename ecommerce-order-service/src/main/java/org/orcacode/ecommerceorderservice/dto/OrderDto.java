@@ -14,17 +14,17 @@ import java.util.UUID;
  * 11/11/2025
  */
 public class OrderDto {
-    private UUID id;
+    private Long id;
     private UUID user_id;
     private Float total_price;
     private String order_status;
     private LocalDate order_date;
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

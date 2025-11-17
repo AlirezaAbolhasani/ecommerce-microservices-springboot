@@ -16,7 +16,7 @@ import java.util.UUID;
 @Table
 public class Payment {
     @Id
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

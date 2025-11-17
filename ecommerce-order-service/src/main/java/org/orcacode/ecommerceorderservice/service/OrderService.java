@@ -1,7 +1,7 @@
 package org.orcacode.ecommerceorderservice.service;
 
 import org.orcacode.ecommerceorderservice.dto.OrderDto;
-import org.orcacode.ecommerceorderservice.dto.OrderMapper;
+import org.orcacode.ecommerceorderservice.mapper.OrderMapper;
 import org.orcacode.ecommerceorderservice.entity.Order;
 import org.orcacode.ecommerceorderservice.exception.OrderBusinessesException;
 import org.orcacode.ecommerceorderservice.messages.Messages;
@@ -30,7 +30,7 @@ public class OrderService {
         this.orderMapper = orderMapper;
     }
     @Transactional
-    public OrderDto findById(Long id) {
+    public OrderDto getOrderById(Long id) {
         OrderDto orderDto;
         if (id == null) {
             throw new OrderBusinessesException(HttpStatus.BAD_REQUEST, Messages.ORDER_BAD_REQUEST);
@@ -46,13 +46,13 @@ public class OrderService {
     }
     @Transactional
     public OrderDto updateOrder(Long id, OrderDto dto) {
-        Order order = orderMapper.toEntity(findById(id));
+        Order order = orderMapper.toEntity(getOrderById(id));
         orderMapper.updateFromDto(dto,order);
         return orderMapper.toDto(orderRepository.save(order));
     }
     @Transactional
     public OrderDto removeOrder(Long id) {
-        OrderDto orderDto = findById(id);
+        OrderDto orderDto = getOrderById(id);
         orderRepository.deleteById(id);
         return orderDto;
     }
