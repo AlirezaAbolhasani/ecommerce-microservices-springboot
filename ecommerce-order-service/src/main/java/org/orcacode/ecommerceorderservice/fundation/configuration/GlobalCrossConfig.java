@@ -1,4 +1,4 @@
-package org.orcacode.ecommerceorderservice.configuration;
+package org.orcacode.ecommerceorderservice.fundation.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package org.orcacode.ecommerceorderservice.exception;
+package org.orcacode.ecommerceorderservice.fundation.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

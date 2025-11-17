@@ -1,16 +1,15 @@
 package org.orcacode.ecommerceorderservice.service;
 
 import org.orcacode.ecommerceorderservice.dto.OrderItemsDto;
-import org.orcacode.ecommerceorderservice.mapper.OrderItemsMapper;
+import org.orcacode.ecommerceorderservice.fundation.mapper.OrderItemsMapper;
 import org.orcacode.ecommerceorderservice.entity.OrderItems;
 import org.orcacode.ecommerceorderservice.repository.OrderItemsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Alireza Abolhasani
@@ -31,6 +30,15 @@ public class OrderItemService {
     @Transactional
     public List<OrderItemsDto> findOrderItemsByOrderId(Long id) {
         List<OrderItems> orderItems = orderItemsRepository.findByOrderId(id);
-        return orderItemsMapper.toDto(orderItems);
+        List<OrderItemsDto> orderItemsDtos = new ArrayList<>();
+        for (OrderItems orderItem : orderItems) {
+            orderItemsDtos.add(orderItemsMapper.toDto(orderItem));
+        }
+        return orderItemsDtos;
+    }
+
+    @Transactional
+    public OrderItemsDto addOrderItem(OrderItemsDto dto) {
+        return orderItemsMapper.toDto(orderItemsRepository.save(orderItemsMapper.toEntity(dto)));
     }
 }

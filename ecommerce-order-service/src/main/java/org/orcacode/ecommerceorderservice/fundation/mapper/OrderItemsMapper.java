@@ -1,4 +1,4 @@
-package org.orcacode.ecommerceorderservice.mapper;
+package org.orcacode.ecommerceorderservice.fundation.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -19,8 +19,6 @@ import java.util.List;
 public interface OrderItemsMapper {
     OrderItemsMapper INSTANCE = Mappers.getMapper(OrderItemsMapper.class);
     OrderItemsDto toDto(OrderItems orderItems);
-    OrderItems toEntity(OrderItems orderItems);
-    List<OrderItemsDto> toDto(List<OrderItems> orderItems);
-    List<OrderItems> toEntity(List<OrderItemsDto> orderItemsDto);
+    OrderItems toEntity(OrderItemsDto orderItems);
     OrderItemsDto updateFromDto(OrderItemsDto dto , @MappingTarget OrderItems entity);
 }

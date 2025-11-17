@@ -1,18 +1,9 @@
 package org.orcacode.ecommerceorderservice.controller;
 
-import org.modelmapper.ModelMapper;
-import org.orcacode.ecommerceorderservice.dto.OrderDto;
-import org.orcacode.ecommerceorderservice.dto.OrderItemsDto;
-import org.orcacode.ecommerceorderservice.entity.Order;
-import org.orcacode.ecommerceorderservice.entity.OrderItems;
+
 import org.orcacode.ecommerceorderservice.model.OrderModel;
-import org.orcacode.ecommerceorderservice.service.OrderItemService;
-import org.orcacode.ecommerceorderservice.service.OrderService;
 import org.orcacode.ecommerceorderservice.service.OrderServiceManager;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Alireza Abolhasani

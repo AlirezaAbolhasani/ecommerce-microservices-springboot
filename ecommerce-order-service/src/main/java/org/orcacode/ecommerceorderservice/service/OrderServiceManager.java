@@ -4,20 +4,17 @@ import org.modelmapper.ModelMapper;
 import org.orcacode.ecommerceorderservice.dto.OrderDto;
 import org.orcacode.ecommerceorderservice.dto.OrderItemsDto;
 import org.orcacode.ecommerceorderservice.entity.Order;
-import org.orcacode.ecommerceorderservice.entity.OrderItems;
-import org.orcacode.ecommerceorderservice.exception.OrderBusinessesException;
-import org.orcacode.ecommerceorderservice.messages.Messages;
+import org.orcacode.ecommerceorderservice.fundation.exception.OrderBusinessesException;
+import org.orcacode.ecommerceorderservice.fundation.messages.Messages;
 import org.orcacode.ecommerceorderservice.model.OrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Alireza Abolhasani
@@ -36,26 +33,36 @@ public class OrderServiceManager {
         this.orderItemService = orderItemService;
         this.modelMapper = modelMapper;
     }
+
     @Transactional
     public OrderModel getOrderInformationByOrderId(Long orderId) {
         if (orderId == null) {
             throw new OrderBusinessesException(HttpStatus.BAD_REQUEST, Messages.ORDER_BAD_REQUEST);
         } else {
-            OrderDto orderDto =orderService.getOrderById(orderId);
-            List<OrderItemsDto> orderItemsDtoList=orderItemService.findOrderItemsByOrderId(orderId);
+            OrderDto orderDto = orderService.getOrderById(orderId);
+            List<OrderItemsDto> orderItemsDtoList = orderItemService.findOrderItemsByOrderId(orderId);
             OrderModel orderModel = new OrderModel();
-            orderModel.setOrder(modelMapper.map(orderDto, Order.class));
-            orderModel.setOrderItems(orderItemsDtoList.stream().map(orderItem -> modelMapper.map(orderItem,OrderItems.class)).collect(Collectors.toList()));
+            orderModel.setOrder(modelMapper.map(orderDto, OrderDto.class));
+            orderModel.setOrderItems(orderItemsDtoList.stream().map(orderItem -> modelMapper.map(orderItem, OrderItemsDto.class)).collect(Collectors.toList()));
             return orderModel;
         }
     }
+
     @Transactional
     public OrderModel saveOrder(OrderModel orderModel) {
-        Order order = modelMapper.map(orderModel, Order.class);
-        List<OrderItems> orderItemsList = orderModel.getOrderItems().stream().map( oi-> modelMapper.map(oi, OrderItems.class)).collect(Collectors.toList());
+        OrderItemsDto orderItemsDto;
+        Order order;
+        OrderDto orderDto = modelMapper.map(orderModel.getOrder(), OrderDto.class);
 
-        orderService.createOrder(modelMapper.map(order , OrderDto.class));
-
+        List<OrderItemsDto> orderItemsList = new ArrayList<OrderItemsDto>();
+        orderService.createOrder(orderDto);
+        for (OrderItemsDto orderItemDto : orderModel.getOrderItems()) {
+            orderItemsList.add(modelMapper.map(orderItemDto, OrderItemsDto.class));
+            orderItemService.addOrderItem(orderItemDto);
+        }
+        return orderModel;
     }
+
+
 
 }

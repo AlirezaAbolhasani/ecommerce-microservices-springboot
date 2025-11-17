@@ -1,4 +1,4 @@
-package org.orcacode.ecommerceorderservice.messages;
+package org.orcacode.ecommerceorderservice.fundation.messages;
 
 public class Messages {
     /**
