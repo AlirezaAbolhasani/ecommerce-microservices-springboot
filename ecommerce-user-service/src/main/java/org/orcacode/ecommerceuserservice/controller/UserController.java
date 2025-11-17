@@ -29,11 +29,9 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 public class UserController {
 
     private final UserService userSrv;
-    private final User user;
 
     public UserController(UserService userSrv) {
         this.userSrv = userSrv;
-        this.user = new User();
     }
 
     /**
@@ -84,6 +82,7 @@ public class UserController {
             )
     })
     public ResponseEntity<User> addUser(String userName, String email) {
+        User user = new User();
         user.setUserName(userName);
         user.setEmail(email);
         user.setCreationDate(LocalDate.now());

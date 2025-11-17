@@ -13,7 +13,7 @@ import java.util.Currency;
 import java.util.UUID;
 
 @Entity
-@Table
+@Table(name = "ec_payment" , schema = "public")
 public class Payment {
     @Id
     @Column(unique = true)

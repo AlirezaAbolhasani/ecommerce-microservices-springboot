@@ -1,17 +1,19 @@
 package org.orcacode.ecommerceorderservice.controller;
 
 
+
 import org.orcacode.ecommerceorderservice.model.OrderModel;
 import org.orcacode.ecommerceorderservice.service.OrderServiceManager;
 import org.springframework.web.bind.annotation.*;
+
 
 /**
  * Alireza Abolhasani
  * ecommerce-microservices-springboot
  * 11/11/2025
  */
+@CrossOrigin(origins = "http://localhost:8084")
 @RestController
-@CrossOrigin(origins = "http://127.0.0.1:8084")
 @RequestMapping("/api")
 public class OrderController {
 
@@ -28,7 +30,7 @@ public class OrderController {
 
     @PostMapping("orders/")
     public OrderModel addOrder(@RequestBody(required = true) OrderModel orderModel) {
-
+        return orderServiceManager.saveOrder(orderModel);
     }
 
 }

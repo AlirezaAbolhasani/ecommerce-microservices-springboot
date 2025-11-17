@@ -29,7 +29,7 @@ public class ProductController {
     private final ProductMapper productMapper;
     private final ProductService productService;
 
-    public ProductController(ProductMapper productMapper, ProductService productService) {
+    public ProductController(ProductService productService,ProductMapper productMapper) {
         this.productMapper = productMapper;
         this.productService = productService;
     }
