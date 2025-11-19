@@ -1,7 +1,7 @@
 package org.orcacode.ecommerceorderservice.service;
 
 import org.orcacode.ecommerceorderservice.dto.OrderItemsDto;
-import org.orcacode.ecommerceorderservice.fundation.mapper.OrderItemsMapper;
+import org.orcacode.ecommerceorderservice.mapper.OrderItemsMapper;
 import org.orcacode.ecommerceorderservice.entity.OrderItems;
 import org.orcacode.ecommerceorderservice.repository.OrderItemsRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,12 @@
 package org.orcacode.ecommercepaymentservice.controller;
 
 import org.modelmapper.ModelMapper;
+import org.orcacode.ecommercepaymentservice.dto.PaymentDto;
 import org.orcacode.ecommercepaymentservice.dto.PaymentMapper;
 import org.orcacode.ecommercepaymentservice.service.PaymentService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Alireza Abolhasani
@@ -17,12 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class PaymentController {
     private final PaymentService paymentService;
-    private final PaymentMapper peymentMapper;
 
-    public PaymentController(PaymentService paymentService, PaymentMapper peymentMapper) {
+    public PaymentController(PaymentService paymentService) {
         this.paymentService = paymentService;
-        this.peymentMapper = peymentMapper;
     }
 
+    @GetMapping("payments/{id}")
+    public ResponseEntity<PaymentDto> getPaymentService(@PathVariable long id) {
+        return new ResponseEntity<>(paymentService.getPaymentById(id), HttpStatus.OK);
+    }
 
 }

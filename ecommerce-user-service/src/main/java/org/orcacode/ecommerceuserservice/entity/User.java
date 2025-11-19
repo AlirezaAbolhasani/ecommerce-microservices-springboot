@@ -24,6 +24,7 @@ public class User {
     @Column(nullable = false)
     private LocalDate creationDate;
 
+
     public UUID getId() {
         return id;
     }

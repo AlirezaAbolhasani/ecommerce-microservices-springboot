@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan("org.orcacode.ecommerceorderservice.fundation.mapper")
+@ComponentScan(basePackages = "org.orcacode.ecommerceorderservice.mapper")
 public class EcommerceOrderServiceApplication {
 
 	public static void main(String[] args) {

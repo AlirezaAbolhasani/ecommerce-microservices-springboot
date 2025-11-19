@@ -20,6 +20,17 @@ public class ProductDto {
     private String sku;
     private LocalDate updated_at;
 
+    public ProductDto() {
+    }
+
+    public ProductDto(String name, double price, int quantity, String sku, LocalDate updated_at) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.sku = sku;
+        this.updated_at = updated_at;
+    }
+
     public String getName() {
         return name;
     }

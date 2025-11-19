@@ -26,11 +26,9 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("products/")
 public class ProductController {
-    private final ProductMapper productMapper;
     private final ProductService productService;
 
-    public ProductController(ProductService productService,ProductMapper productMapper) {
-        this.productMapper = productMapper;
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
@@ -64,8 +62,7 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<ProductDto> create(@RequestBody ProductDto dto) {
-        Product productEntity = productMapper.toEntity(dto);
-        ProductDto productDto = productService.saveProduct(productEntity);
+        ProductDto productDto = productService.saveProduct(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
     }
 

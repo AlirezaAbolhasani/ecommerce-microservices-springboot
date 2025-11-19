@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -144,6 +145,6 @@ public class UserController {
             )
     })
     public ResponseEntity<User> deleteUser(@PathVariable UUID id) {
-        return new ResponseEntity<>( userSrv.deleteUser(id), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>( userSrv.deleteUser(id), HttpStatus.OK);
     }
 }

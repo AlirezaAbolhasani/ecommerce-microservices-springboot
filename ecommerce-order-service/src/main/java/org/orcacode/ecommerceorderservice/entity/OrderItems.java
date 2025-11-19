@@ -1,6 +1,9 @@
 package org.orcacode.ecommerceorderservice.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 import java.math.BigDecimal;
@@ -12,6 +15,9 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name = "ec_order_items",schema = "public")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class OrderItems {
     @Id
     @Column(unique = true)
@@ -27,64 +33,4 @@ public class OrderItems {
     private BigDecimal product_price; //Snapshot from price in purchaseTime
     @Column(nullable = false)
     private Integer quantity;
-
-    public OrderItems() {
-    }
-
-    public OrderItems(Long id, Long order_id, Long product_id, String product_name, BigDecimal product_price, Integer quantity) {
-        this.id = id;
-        this.order_id = order_id;
-        this.product_id = product_id;
-        this.product_name = product_name;
-        this.product_price = product_price;
-        this.quantity = quantity;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getOrder_id() {
-        return order_id;
-    }
-
-    public void setOrder_id(Long order_id) {
-        this.order_id = order_id;
-    }
-
-    public Long getProduct_id() {
-        return product_id;
-    }
-
-    public void setProduct_id(Long product_id) {
-        this.product_id = product_id;
-    }
-
-    public String getProduct_name() {
-        return product_name;
-    }
-
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
-    }
-
-    public BigDecimal getProduct_price() {
-        return product_price;
-    }
-
-    public void setProduct_price(BigDecimal product_price) {
-        this.product_price = product_price;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
 }

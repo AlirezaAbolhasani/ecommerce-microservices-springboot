@@ -57,12 +57,8 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductDto saveProduct(Product product) {
-        if (product == null) {
-            throw new BusinessException(HttpStatus.BAD_REQUEST, BAD_REQUEST);
-        } else {
-            return productMapper.toDto(productRepository.save(product));
-        }
+    public ProductDto saveProduct(ProductDto dto) {
+        return productMapper.toDto(productRepository.save(productMapper.toEntity(dto)));
     }
 
     @Transactional

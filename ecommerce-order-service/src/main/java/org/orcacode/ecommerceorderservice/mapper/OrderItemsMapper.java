@@ -1,4 +1,4 @@
-package org.orcacode.ecommerceorderservice.fundation.mapper;
+package org.orcacode.ecommerceorderservice.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -7,14 +7,12 @@ import org.mapstruct.factory.Mappers;
 import org.orcacode.ecommerceorderservice.dto.OrderItemsDto;
 import org.orcacode.ecommerceorderservice.entity.OrderItems;
 
-import java.util.List;
-
 /**
  * Alireza Abolhasani
  * ecommerce-microservices-springboot
  * 11/12/2025
  */
-@Mapper(componentModel = "spring",
+@Mapper(componentModel = "spring" ,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface OrderItemsMapper {
     OrderItemsMapper INSTANCE = Mappers.getMapper(OrderItemsMapper.class);

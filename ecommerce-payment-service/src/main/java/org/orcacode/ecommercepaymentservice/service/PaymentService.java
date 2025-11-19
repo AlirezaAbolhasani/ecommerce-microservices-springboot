@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
  * 11/11/2025
  */
 @Service
-@Lazy
 public class PaymentService {
     private final PaymentRepository payRepo;
     private final PaymentMapper payMapper;
@@ -54,6 +53,7 @@ public class PaymentService {
         Payment savedPayment = payRepo.save(payment);
         return payMapper.toDto(savedPayment);
     }
+
     @Transactional
     public PaymentDto deletePayment(Long id) {
        Payment payment =payMapper.toEntity(getPaymentById(id));

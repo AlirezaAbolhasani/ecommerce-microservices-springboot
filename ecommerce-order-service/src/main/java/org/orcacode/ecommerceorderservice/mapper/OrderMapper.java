@@ -1,4 +1,4 @@
-package org.orcacode.ecommerceorderservice.fundation.mapper;
+package org.orcacode.ecommerceorderservice.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
