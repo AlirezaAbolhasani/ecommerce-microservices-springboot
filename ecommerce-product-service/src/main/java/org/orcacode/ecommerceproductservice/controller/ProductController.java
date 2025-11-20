@@ -11,6 +11,7 @@ import org.orcacode.ecommerceproductservice.entity.Product;
 import org.orcacode.ecommerceproductservice.exception.BusinessException;
 import org.orcacode.ecommerceproductservice.services.ProductService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.orcacode.ecommerceproductservice.messages.*;
@@ -24,7 +25,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
  */
 @CrossOrigin(origins = "http://localhost:8082")
 @RestController
-@RequestMapping("products/")
+@RequestMapping(path = {"/api/v1"}, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProductController {
     private final ProductService productService;
 
@@ -32,7 +33,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("products/{id}")
+    @GetMapping("/products/{id}")
     @Operation(summary = "Find a product by id. This number is unique.",
             description = "Id must existed.")
     @ApiResponses(value = {
@@ -54,7 +55,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }
 
-    @GetMapping("products/{id}")
+    @GetMapping("/products/{id}")
     public ResponseEntity<List<ProductDto>> getAllProduct() {
         List<ProductDto> productDto = productService.getAllProducts();
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
@@ -66,19 +67,19 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
     }
 
-    @PatchMapping("products/{id}")
+    @PatchMapping("/products/{id}")
     public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody ProductDto dto) {
         ProductDto productDto = productService.updatePartial(id, dto);
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }
 
-    @PutMapping("products/{id}")
+    @PutMapping("/products/{id}")
     public ResponseEntity<ProductDto> updateQuantity(@PathVariable Long id, @RequestBody Integer quantity) {
         ProductDto productDto = productService.updateProductQuantity(id, quantity);
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }
 
-    @DeleteMapping("products/{id}")
+    @DeleteMapping("/products/{id}")
     public ResponseEntity<ProductDto> delete(@PathVariable Long id) {
         ProductDto productDto = productService.deleteProductById(id);
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
