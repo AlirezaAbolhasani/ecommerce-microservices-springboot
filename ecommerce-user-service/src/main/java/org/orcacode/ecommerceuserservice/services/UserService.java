@@ -30,7 +30,7 @@ public class UserService {
 
     @Autowired
     public UserService(UserRepo userRepo) {
-        this.userRepo = Objects.requireNonNull(userRepo, REPOSITORY_MUST_NOT_BE_NULL);
+        this.userRepo = userRepo;
     }
 
     @Transactional

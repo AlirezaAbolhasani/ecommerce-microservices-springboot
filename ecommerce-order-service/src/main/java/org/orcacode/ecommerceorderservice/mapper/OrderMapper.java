@@ -12,12 +12,13 @@ import org.orcacode.ecommerceorderservice.entity.Order;
  * ecommerce-microservices-springboot
  * 11/11/2025
  */
-@Mapper(componentModel = "spring",
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring"
+        ,nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
     OrderDto toDto(Order order);
     Order toEntity(OrderDto orderDto);
 
     void updateFromDto(OrderDto orderDto,@MappingTarget Order order);
+
 }

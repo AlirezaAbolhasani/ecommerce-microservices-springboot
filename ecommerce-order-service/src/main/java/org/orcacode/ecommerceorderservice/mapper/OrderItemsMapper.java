@@ -12,8 +12,8 @@ import org.orcacode.ecommerceorderservice.entity.OrderItems;
  * ecommerce-microservices-springboot
  * 11/12/2025
  */
-@Mapper(componentModel = "spring" ,
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring"
+        ,nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface OrderItemsMapper {
     OrderItemsMapper INSTANCE = Mappers.getMapper(OrderItemsMapper.class);
     OrderItemsDto toDto(OrderItems orderItems);

@@ -24,6 +24,15 @@ public class User {
     @Column(nullable = false)
     private LocalDate creationDate;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", creationDate=" + creationDate +
+                '}';
+    }
 
     public UUID getId() {
         return id;
