@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Alireza Abolhasani
@@ -28,7 +27,7 @@ public class OrderServiceManager {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public OrderServiceManager(OrderService orderService, OrderItemService orderItemService, ModelMapper modelMapper) {
+    public OrderServiceManager(OrderService orderService, OrderItemService orderItemService,ModelMapper modelMapper) {
         this.orderService = orderService;
         this.orderItemService = orderItemService;
         this.modelMapper = modelMapper;
@@ -42,8 +41,8 @@ public class OrderServiceManager {
             OrderDto orderDto = orderService.getOrderById(orderId);
             List<OrderItemsDto> orderItemsDtoList = orderItemService.findOrderItemsByOrderId(orderId);
             OrderModel orderModel = new OrderModel();
-            orderModel.setOrder(modelMapper.map(orderDto, OrderDto.class));
-            orderModel.setOrderItems(orderItemsDtoList.stream().map(orderItem -> modelMapper.map(orderItem, OrderItemsDto.class)).collect(Collectors.toList()));
+//            orderModel.setOrder(modelMapper.map(orderDto, OrderDto.class));
+//            orderModel.setOrderItems(orderItemsDtoList.stream().map(orderItem -> modelMapper.map(orderItem, OrderItemsDto.class)).collect(Collectors.toList()));
             return orderModel;
         }
     }

@@ -3,11 +3,8 @@ package org.orcacode.ecommerceorderservice.service;
 import org.orcacode.ecommerceorderservice.dto.OrderDto;
 import org.orcacode.ecommerceorderservice.mapper.OrderMapper;
 import org.orcacode.ecommerceorderservice.entity.Order;
-import org.orcacode.ecommerceorderservice.exception.OrderBusinessesException;
-import org.orcacode.ecommerceorderservice.messages.Messages;
 import org.orcacode.ecommerceorderservice.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,12 +26,12 @@ public class OrderService {
     }
     @Transactional
     public OrderDto getOrderById(Long id) {
-        OrderDto orderDto;
-        if (id == null) {
-            throw new OrderBusinessesException(HttpStatus.BAD_REQUEST, Messages.ORDER_BAD_REQUEST);
-        } else {
-            orderDto = orderMapper.toDto(orderRepository.findById(id).orElseThrow(() -> new OrderBusinessesException(HttpStatus.NOT_FOUND, Messages.ORDER_NOT_FOUND)));
-        }
+        OrderDto orderDto= new OrderDto();
+//        if (id == null) {
+//            throw new OrderBusinessesException(HttpStatus.BAD_REQUEST, Messages.ORDER_BAD_REQUEST);
+//        } else {
+//            orderDto = orderMapper.toDto(orderRepository.findById(id).orElseThrow(() -> new OrderBusinessesException(HttpStatus.NOT_FOUND, Messages.ORDER_NOT_FOUND)));
+//        }
         return orderDto;
     }
     @Transactional

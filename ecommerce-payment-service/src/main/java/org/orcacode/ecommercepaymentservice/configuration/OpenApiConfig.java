@@ -1,4 +1,4 @@
-package org.orcacode.ecommerceorderservice.configuration;
+package org.orcacode.ecommercepaymentservice.configuration;
 
 
 import io.swagger.v3.oas.models.OpenAPI;
@@ -21,7 +21,7 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("Orders Information")
                         .version("1.0")
-                        .description("Orders API documentation for my Spring Boot app")
+                        .description("Product API documentation for my Spring Boot app")
                         .contact(new Contact()
                                 .name("Alireza")
                                 .email("alireza.1111@gmail.com")));

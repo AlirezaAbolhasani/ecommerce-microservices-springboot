@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
  * 11/5/2025
  */
 @Configuration
-@ComponentScan(value = "org.orcacode.ecommerceproductservice.dto")
 public class OrderConfiguration {
     @Bean
     public ModelMapper modelMapper(){

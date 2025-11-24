@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.orcacode.ecommercepaymentservice.dto.PaymentDto;
 import org.orcacode.ecommercepaymentservice.dto.PaymentMapper;
 import org.orcacode.ecommercepaymentservice.service.PaymentService;
+import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * ecommerce-microservices-springboot
  * 11/11/2025
  */
-@CrossOrigin(origins = "http://127.0.0.1:8083")
+@CrossOrigin(origins = "http://localhost:8084")
 @RestController
 @RequestMapping("/api")
 public class PaymentController {
@@ -23,9 +24,13 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    @GetMapping("payments/{id}")
+    @GetMapping("/payments/{id}")
     public ResponseEntity<PaymentDto> getPaymentService(@PathVariable long id) {
         return new ResponseEntity<>(paymentService.getPaymentById(id), HttpStatus.OK);
+    }
+    @PostMapping("/payments")
+    public ResponseEntity<PaymentDto> createPayment(@RequestBody PaymentDto paymentDto) {
+        return new ResponseEntity<>(paymentService.savePayment(paymentDto), HttpStatus.CREATED);
     }
 
 }
