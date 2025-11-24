@@ -1,0 +1,8 @@
+# application.yml
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  packages-to-scan: org.orcacode.ecommerceproductservice
+  paths-to-match: /**

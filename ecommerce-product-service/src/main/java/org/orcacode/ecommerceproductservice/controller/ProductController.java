@@ -55,7 +55,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/products")
     public ResponseEntity<List<ProductDto>> getAllProduct() {
         List<ProductDto> productDto = productService.getAllProducts();
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
@@ -67,15 +67,15 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productDto);
     }
 
-    @PatchMapping("/products/{id}")
-    public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody ProductDto dto) {
-        ProductDto productDto = productService.updatePartial(id, dto);
+    @PutMapping("/products/{id}")
+    public ResponseEntity<ProductDto> updateProductQuantity(@PathVariable Long id, @RequestBody Integer quantity) {
+        ProductDto productDto = productService.updateProductQuantity(id, quantity);
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }
 
-    @PutMapping("/products/{id}")
-    public ResponseEntity<ProductDto> updateQuantity(@PathVariable Long id, @RequestBody Integer quantity) {
-        ProductDto productDto = productService.updateProductQuantity(id, quantity);
+    @PatchMapping("/products/{id}")
+    public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody ProductDto dto) {
+        ProductDto productDto = productService.updatePartial(id, dto);
         return ResponseEntity.status(HttpStatus.OK).body(productDto);
     }
 

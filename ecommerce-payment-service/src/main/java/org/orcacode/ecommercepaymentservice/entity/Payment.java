@@ -7,6 +7,11 @@ package org.orcacode.ecommercepaymentservice.entity;
  */
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Currency;
@@ -14,6 +19,10 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "ec_payment" , schema = "public")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Payment {
     @Id
     @Column(unique = true)
@@ -38,96 +47,10 @@ public class Payment {
     @Column(nullable = false , scale = 4 , precision = 19)
     private BigDecimal amount;
 
-    @Column(nullable = false)
-    private Currency currency;
+//    @Column(nullable = false)
+//    private Currency currency;
 
     @Column(nullable = false)
     private LocalDate paymentDate;
 
-    public Payment(Long id, Long orderId, UUID userId, LocalDate date, Short status, Long productId, BigDecimal amount, Currency currency, LocalDate paymentDate) {
-        this.id = id;
-        this.orderId = orderId;
-        this.userId = userId;
-        this.date = date;
-        this.status = status;
-        this.productId = productId;
-        this.amount = amount;
-        this.currency = currency;
-        this.paymentDate = paymentDate;
-    }
-
-    public Payment() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public UUID getUserId() {
-        return userId;
-    }
-
-    public void setUserId(UUID userId) {
-        this.userId = userId;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public Short getStatus() {
-        return status;
-    }
-
-    public void setStatus(Short status) {
-        this.status = status;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
-    }
-
-    public LocalDate getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(LocalDate paymentDate) {
-        this.paymentDate = paymentDate;
-    }
 }

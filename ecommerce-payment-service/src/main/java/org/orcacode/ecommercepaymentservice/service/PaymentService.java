@@ -48,7 +48,7 @@ public class PaymentService {
 
     @Transactional
     public PaymentDto updatePayment(Long id, PaymentDto patchDto) {
-        Payment payment = payMapper.toEntity(getPaymentById(id));
+        Payment payment = payRepo.findById(id).orElseThrow(()->new BusinessesException(HttpStatus.NOT_FOUND, Messages.PAYMENT_NOT_FOUND));
         payMapper.updateFromDto(patchDto, payment);
         Payment savedPayment = payRepo.save(payment);
         return payMapper.toDto(savedPayment);
@@ -56,7 +56,7 @@ public class PaymentService {
 
     @Transactional
     public PaymentDto deletePayment(Long id) {
-       Payment payment =payMapper.toEntity(getPaymentById(id));
+       Payment payment =payRepo.findById(id).orElseThrow(()->new BusinessesException(HttpStatus.NOT_FOUND, Messages.PAYMENT_NOT_FOUND));
        payRepo.delete(payment);
        return payMapper.toDto(payment);
     }
