@@ -14,7 +14,7 @@ Each service is fully isolated, follows Database per Service pattern, and commun
 
 Java 17, Spring Boot 3
 
-Spring Web, Spring Data JPA, Spring cloud
+Spring Web, Spring Data JPA, Spring cloud , Spring Security
 
 Design and think depend on container and Microservice Based
 
