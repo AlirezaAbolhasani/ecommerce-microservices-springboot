@@ -1,6 +1,8 @@
 package org.orcacode.ecommercepaymentservice.repository;
 
-import org.orcacode.ecommercepaymentservice.entity.Payment;
+import org.orcacode.ecommercepaymentservice.entity.PaymentEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +12,6 @@ import org.springframework.stereotype.Repository;
  * 11/11/2025
  */
 @Repository
-public interface PaymentRepository extends JpaRepository<Payment, Long> {
+public interface PaymentRepository extends JpaRepository<PaymentEntity, Long> {
+    Page<PaymentEntity> findAll(Pageable pageable);
 }

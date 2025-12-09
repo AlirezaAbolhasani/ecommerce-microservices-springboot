@@ -3,12 +3,14 @@ package org.orcacode.ecommercepaymentservice.service;
 import org.modelmapper.ModelMapper;
 import org.orcacode.ecommercepaymentservice.dto.PaymentDto;
 import org.orcacode.ecommercepaymentservice.dto.PaymentMapper;
-import org.orcacode.ecommercepaymentservice.entity.Payment;
+import org.orcacode.ecommercepaymentservice.entity.PaymentEntity;
 import org.orcacode.ecommercepaymentservice.exception.BusinessesException;
 import org.orcacode.ecommercepaymentservice.messages.Messages;
 import org.orcacode.ecommercepaymentservice.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  * ecommerce-microservices-springboot
  * 11/11/2025
  */
+
 @Service
 public class PaymentService {
     private final PaymentRepository payRepo;
@@ -41,24 +44,33 @@ public class PaymentService {
     }
 
     @Transactional
+    public Page<PaymentDto> getPayment(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return payRepo.findAll(pageable).map(payMapper::toDto);
+    }
+
+    @Transactional
     public PaymentDto savePayment(PaymentDto paymentDto) {
-        Payment payment = modelMapper.map(paymentDto, Payment.class);
+        //  First way
+        //  Payment payment = modelMapper.map(paymentDto, Payment.class);
+        //  Second way
+        PaymentEntity payment = payMapper.toEntity(paymentDto);
         return payMapper.toDto(payRepo.save(payment));
     }
 
     @Transactional
-    public PaymentDto updatePayment(Long id, PaymentDto patchDto) {
-        Payment payment = payRepo.findById(id).orElseThrow(()->new BusinessesException(HttpStatus.NOT_FOUND, Messages.PAYMENT_NOT_FOUND));
+    public PaymentDto updatePayment(PaymentDto patchDto) {
+        PaymentEntity payment = payRepo.findById(patchDto.getId()).orElseThrow(() -> new BusinessesException(HttpStatus.NOT_FOUND, Messages.PAYMENT_NOT_FOUND));
         payMapper.updateFromDto(patchDto, payment);
-        Payment savedPayment = payRepo.save(payment);
+        PaymentEntity savedPayment = payRepo.save(payment);
         return payMapper.toDto(savedPayment);
     }
 
     @Transactional
     public PaymentDto deletePayment(Long id) {
-       Payment payment =payRepo.findById(id).orElseThrow(()->new BusinessesException(HttpStatus.NOT_FOUND, Messages.PAYMENT_NOT_FOUND));
-       payRepo.delete(payment);
-       return payMapper.toDto(payment);
+        PaymentEntity payment = payRepo.findById(id).orElseThrow(() -> new BusinessesException(HttpStatus.NOT_FOUND, Messages.PAYMENT_NOT_FOUND));
+        payRepo.delete(payment);
+        return payMapper.toDto(payment);
     }
 
 }
