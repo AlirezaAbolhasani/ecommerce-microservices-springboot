@@ -5,7 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.orcacode.ecommerceuserservice.entity.User;
+import org.orcacode.ecommerceuserservice.entity.UserEntity;
 import org.orcacode.ecommerceuserservice.excption.BusinessException;
 import org.orcacode.ecommerceuserservice.messages.Messages;
 import org.orcacode.ecommerceuserservice.services.UserService;
@@ -48,7 +48,7 @@ public class UserController {
             @ApiResponse(
                     responseCode = "200", description = Messages.USER_SUCCESSFULLY_FOUND
                     , content = {@Content(mediaType = APPLICATION_JSON_VALUE,
-                    schema = @Schema(implementation = User.class))
+                    schema = @Schema(implementation = UserEntity.class))
             }
             ),
             @ApiResponse(
@@ -58,7 +58,7 @@ public class UserController {
             }
             )
     })
-    public ResponseEntity<User> getUser(@PathVariable UUID id) {
+    public ResponseEntity<UserEntity> getUser(@PathVariable UUID id) {
         return ResponseEntity.status(HttpStatus.OK).body(userSrv.getUserById(id));
     }
 
@@ -69,7 +69,7 @@ public class UserController {
      * @param email    Provides the email
      * @return Provide User inserted all data
      */
-    @PostMapping("users/")
+    @PostMapping("/users/")
     @Operation(summary = "Insert a new user to DB",
             description = "UserName and email address are necessary")
     @ApiResponses(value = {
@@ -78,16 +78,16 @@ public class UserController {
                     description = Messages.INSERT_USER_SUCCESSFULLY,
                     content = {
                             @Content(mediaType = APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = User.class))
+                                    schema = @Schema(implementation = UserEntity.class))
                     }
             )
     })
-    public ResponseEntity<User> addUser(String userName, String email) {
-        User user = new User();
+    public ResponseEntity<UserEntity> addUser(String userName, String email) {
+        UserEntity user = new UserEntity();
         user.setUserName(userName);
         user.setEmail(email);
         user.setCreationDate(LocalDate.now());
-        User newUser = userSrv.saveUser(user);
+        UserEntity newUser = userSrv.saveUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
@@ -97,7 +97,7 @@ public class UserController {
      * @param user in user just will update name and email address
      * @return user that information will chang or not
      */
-    @PatchMapping("users/{id}")
+    @PatchMapping("/users/{id}")
     @Operation(summary = "Update values like email and  e-commerce's user table",
             description = "Just you can update email and username")
     @ApiResponses(value = {
@@ -106,7 +106,7 @@ public class UserController {
                     description = Messages.UPDATED_USER_SUCCESSFULLY,
                     content = {
                             @Content(mediaType = APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = User.class))
+                                    schema = @Schema(implementation = UserEntity.class))
                     }
             ),
             @ApiResponse(
@@ -115,7 +115,7 @@ public class UserController {
                     content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema)}
             )
     })
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
+    public ResponseEntity<UserEntity> updateUser(@RequestBody UserEntity user) {
         userSrv.updateUser(user);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
@@ -126,7 +126,7 @@ public class UserController {
      * @param id that need to delete its information
      * @return user that information will delete or not
      */
-    @DeleteMapping("users/{id}")
+    @DeleteMapping("/users/{id}")
     @Operation(summary = "Use user Id to delete user from e-commerce's user table",
             description = "Id is necessary entry.")
     @ApiResponses(value = {
@@ -135,7 +135,7 @@ public class UserController {
                     description = Messages.DELETED_USER_SUCCESSFULLY,
                     content = {
                             @Content(mediaType = APPLICATION_JSON_VALUE,
-                                    schema = @Schema(implementation = User.class))
+                                    schema = @Schema(implementation = UserEntity.class))
                     }
             ),
             @ApiResponse(
@@ -144,7 +144,7 @@ public class UserController {
                     content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema)}
             )
     })
-    public ResponseEntity<User> deleteUser(@PathVariable UUID id) {
+    public ResponseEntity<UserEntity> deleteUser(@PathVariable UUID id) {
         return new ResponseEntity<>( userSrv.deleteUser(id), HttpStatus.OK);
     }
 }

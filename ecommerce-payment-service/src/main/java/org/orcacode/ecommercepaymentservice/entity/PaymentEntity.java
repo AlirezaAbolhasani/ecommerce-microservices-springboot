@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Currency;
 import java.util.UUID;
 
 @Entity
@@ -23,10 +22,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Payment {
+public class PaymentEntity {
     @Id
     @Column(unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE , generator = "gen_payment_seq" )
+    @SequenceGenerator(name = "gen_payment_seq" , allocationSize = 1 , initialValue = 1 , schema = "public" , sequenceName = "payment_seq")
     private Long id;
 
     @Column(nullable = false)

@@ -12,7 +12,7 @@ import java.util.UUID;
  */
 @Entity
 @Table(name = "ec_user",schema = "public")
-public class User {
+public class UserEntity {
     @Id
     @Column(unique = true, nullable = false, updatable = false,name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
