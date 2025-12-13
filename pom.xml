@@ -19,10 +19,10 @@
     </properties>
 
     <modules>
-        <module>ecommerce-product-service</module>
-        <module>ecommerce-user-service</module>
-        <module>ecommerce-payment-service</module>
         <module>ecommerce-order-service</module>
+        <module>ecommerce-payment-service</module>
+        <module>ecommerce-user-service</module>
+        <module>ecommerce-product-service</module>
     </modules>
 
 </project>
