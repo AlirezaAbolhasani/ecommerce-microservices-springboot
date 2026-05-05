@@ -31,4 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/main/java/org/orcacode/ecommerceorderservice/configuration/configModelMapper.java
+/src/main/java/ir/orcacode/ecommerceorderservice/configuration/configModelMapper.java
